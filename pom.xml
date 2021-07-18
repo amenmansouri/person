@@ -11,7 +11,7 @@
 	<groupId>maa.back</groupId>
 	<artifactId>demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>peron</name>
+	<name>person</name>
 	<description>Person management</description>
 	<properties>
 		<java.version>11</java.version>

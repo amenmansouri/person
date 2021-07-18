@@ -20,7 +20,6 @@ public class LegalPersonController {
     LegalPersonService legalPersonService;
     @PostMapping
     PersonDto createOrUpdate(@RequestBody LegalPersonDto legalPersonDto){
-        // attribute u
         return personMapper.map(legalPersonService.saveOrUpdate(personMapper.map(legalPersonDto)));
     }
     @GetMapping
