@@ -1,4 +1,4 @@
-# person - authorization - Invitation - Relation
+# person- Invitation - Relation
 generic person management
 
 
