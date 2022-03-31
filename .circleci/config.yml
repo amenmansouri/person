@@ -42,18 +42,7 @@ jobs:
           username: $DOCKERHUB_USERNAME
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-      - checkout # check out source code to working directory
-
-      - restore_cache: # restore the saved cache after the first run or if `pom.xml` has changed
-                # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
-        key: maa-person-{{ checksum "pom.xml" }}
-
-      - run: mvn dependency:go-offline # gets the project dependencies
-
-      - save_cache: # saves the project dependencies
-          paths:
-            - ~/.m2
-          key: maa-person-{{ checksum "pom.xml" }}
+      - checkout
       - run: ./mvnw -Dmaven.test.skip=true package
       - persist_to_workspace:
           root: ./
@@ -68,16 +57,6 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - restore_cache: # restore the saved cache after the first run or if `pom.xml` has changed
-        # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
-        key: maa-person-{{ checksum "pom.xml" }}
-
-      - run: mvn dependency:go-offline # gets the project dependencies
-
-      - save_cache: # saves the project dependencies
-          paths:
-            - ~/.m2
-          key: maa-person-{{ checksum "pom.xml" }}
       - attach_workspace:
           at: ./target
       - run: ./mvnw test

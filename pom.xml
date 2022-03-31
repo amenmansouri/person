@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>maa.back</groupId>
-	<artifactId>demo</artifactId>
+	<artifactId>person</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>person</name>
 	<description>Person management</description>
