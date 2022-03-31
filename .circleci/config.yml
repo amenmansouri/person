@@ -26,7 +26,7 @@ jobs: # a collection of steps
           key: maa-person-{{ checksum "pom.xml" }}
 
       - run: mvn verify # run the actual tests
-      - run: mv target/*.jar target/app.jar # change name of jar file
+      - run: mv target/*.jar app.jar # change name of jar file
 
       - store_test_results: # uploads the test metadata from the `target/surefire-reports` directory so that it can show up in the CircleCI dashboard.
           # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
@@ -34,7 +34,7 @@ jobs: # a collection of steps
 
       - store_artifacts: # store the uberjar as an artifact
           # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
-          path: target/app.jar
+          path: app.jar
       # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples7
 
 #version: 2.0

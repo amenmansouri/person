@@ -32,7 +32,7 @@ public interface PersonMapper {
             } else if (person instanceof NaturalPerson) {
                 return this.map((NaturalPerson) person);
             } else {
-                return this.map((Person) person);
+                return this.map(person);
             }
         }
 
@@ -43,7 +43,7 @@ public interface PersonMapper {
             } else if (personDto instanceof NaturalPersonDto) {
                 return this.map((NaturalPersonDto) personDto);
             } else {
-                return this.map((PersonDto) personDto);
+                return this.map(personDto);
             }
         }
 
