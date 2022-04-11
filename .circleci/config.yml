@@ -27,10 +27,10 @@ jobs: # a collection of steps
 
       - run: mvn verify # run the actual tests
       - run: mv target/*.jar app.jar # change name of jar file
-      - persist_to_workspace:
-        root: ./
-        paths:
-          - app.jar
+#      - persist_to_workspace: # persist to workspace
+#        root: ./
+#        paths:
+#          - app.jar
       - store_test_results: # uploads the test metadata from the `target/surefire-reports` directory so that it can show up in the CircleCI dashboard.
           # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: target/surefire-reports
