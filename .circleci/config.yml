@@ -47,11 +47,9 @@ jobs: # a collection of steps
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - run:
-          name: Login to DockerHub
-          command: docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
-      - run: mvn clean compile jib:build -Dimage=$DOCKERHUB_USERNAME/maa-person:$CIRCLE_BUILD_NUM
-
+      - attach_workspace:
+          at: ./target
+      - run: ./mvnw test
 
 
 workflows:
