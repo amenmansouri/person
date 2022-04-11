@@ -26,10 +26,6 @@ jobs: # a collection of steps
           key: maa-person-{{ checksum "pom.xml" }}
 
       - run: mvn verify # run the actual tests
-      - run:
-          name: Login to DockerHub
-          command: docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
-      - run: mvn clean compile jib:build -Dimage=$DOCKERHUB_USERNAME/maa-person:$CIRCLE_BUILD_NUM
       - run: mv target/*.jar app.jar # change name of jar file
       - persist_to_workspace:
         root: ./
@@ -51,9 +47,11 @@ jobs: # a collection of steps
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - attach_workspace:
-          at: ./target
-      - run: ./mvnw test
+      - run:
+          name: Login to DockerHub
+          command: docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+      - run: mvn clean compile jib:build -Dimage=$DOCKERHUB_USERNAME/maa-person:$CIRCLE_BUILD_NUM
+
 
 
 workflows:
