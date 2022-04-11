@@ -47,9 +47,11 @@ jobs: # a collection of steps
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - attach_workspace:
-          at: ./target
-      - run: ./mvnw test
+      - run:
+          name: Login to DockerHub
+          command: docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+      - run: mvn clean compile jib:build -Dimage=$DOCKERHUB_USERNAME/maa-person:$CIRCLE_BUILD_NUM
+
 
 
 workflows:
@@ -61,41 +63,3 @@ workflows:
       - dockerize:
           requires:
             - build
-#version: 2.0
-#
-#jobs:
-#  build:
-#    docker:
-#      - image: cimg/openjdk:17.0.1
-#        auth:
-#          username: $DOCKERHUB_USERNAME
-#          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-#    steps:
-#      - checkout
-#      - run: ./mvnw -Dmaven.test.skip=true package
-#      - persist_to_workspace:
-#          root: ./
-#          paths:
-#            - target/
-#
-#  test:
-#    docker:
-#      - image: cimg/openjdk:17.0.1
-#        auth:
-#          username: $DOCKERHUB_USERNAME
-#          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-#    steps:
-#      - checkout
-#      - attach_workspace:
-#          at: ./target
-#      - run: ./mvnw test
-#
-#workflows:
-#  version: 2
-#
-#  build-then-test:
-#    jobs:
-#      - build
-#      - test:
-#          requires:
-#            - build
